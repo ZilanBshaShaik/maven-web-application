@@ -4,7 +4,7 @@
 	
 	<groupId>com.mt</groupId>
 	<artifactId>maven-web-application</artifactId>
-	<version>1.0-snapshort</version>
+	<version>2.0-snapshort</version>
 	<packaging>war</packaging>
 	
 	<name>maven-web-application</name>
@@ -98,14 +98,14 @@
 	
 	    <repository>
 	      <id>nexus</id>
-		    <name>Mithun Technologies Releases Nexus Repository</name>
+	      <name>Mithun Technologies Releases Nexus Repository</name>
 	      <url>http://52.90.105.1:8081/repository/filpkart-release/</url>
 	    </repository>
 	    
 	    <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
-	      <url>http://52.90.105.1:8081/repository/flipkart-snapshort/</url>
+	      <url>http://52.90.105.1:8081/repository/filpkart-release/</url>
 	    </snapshotRepository>
 	    
 	</distributionManagement>
