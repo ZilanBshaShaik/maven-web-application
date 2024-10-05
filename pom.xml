@@ -104,12 +104,12 @@
 	      <!--<url>http://107.20.87.92:8081/repository/maven-web-application-releases/</url>-->
 	    </repository>
 	    
-	   <snapshotRepository>
+	   <!-- <snapshotRepository>
 	      <id>nexus</id>
 	      <name>Mithun Technologies Snapshot Nexus Repository </name>
 	       <url>http://localhost:8081/repository/maven-web-application-snapshots/</url>
 	      <!-- <url>http://52.90.105.1:8081/repository/flipkart-snapshort/</url> -->
-	    </snapshotRepository>
+	    </snapshotRepository> -->
 	    
 	</distributionManagement>
 	
