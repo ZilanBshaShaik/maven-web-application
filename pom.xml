@@ -101,7 +101,7 @@
 	      <id>nexus</id>
 	      <name>maven web application release repository</name>
 	       <url>http://localhost:8081/repository/maven-web-application-releases/</url>
-	      <!--<url>http://107.20.87.92:8081/repository/maven-web-application-releases/</url>-->
+	      <url>http://107.20.87.92:8081/repository/maven-web-application-releases/</url>
 	    </repository> -->
 	    
 	   <snapshotRepository>
