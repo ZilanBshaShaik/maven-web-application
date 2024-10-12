@@ -1,0 +1,33 @@
+node{
+    
+stage('checkout source code') {
+git branch: 'development', credentialsId: 'ae735c5a-da99-4980-8a45-2f77fe1b1fcd', url: 'https://github.com/ZilanBshaShaik/maven-web-application.git'
+}
+
+stage('build') {
+sh "mvn --version"
+sh "mvn clean package"
+}
+
+stage('execute sonar check') {
+    sh "mvn clean sonar:sonar"
+}
+
+stage('push build artifact into nexus repository') {
+    sh "mvn clean deploy"
+}
+
+stage('deploy build artifact into tomcat server') {
+    deploy adapters: [tomcat9(credentialsId: '32164a04-0cb2-43fb-b5a2-d6574089607b', path: '', url: 'http://localhost:9090/manager/html')], contextPath: null, war: '**/maven-web-application.war'
+}
+
+stage('notify the build status over email') {
+    emailext body: '''pipeline build successfully executed hence notifying you the build status via email.
+
+Thanks & Regards
+ZilanBasha Shaik
+DevOps Engineer!''', subject: 'Pipeline Build Status', to: 'br.bashatechz@gmail.com ishaikrabbani@gmail.com'
+}
+
+
+}
