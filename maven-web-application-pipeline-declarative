@@ -1,0 +1,42 @@
+pipeline {
+    agent {label 'jenkins-slave1'}
+    
+    tools {
+        maven 'maven-3.9.9'
+    }
+    
+    stages {
+        stage('Check the source code') {
+            steps{
+            git branch: 'development', credentialsId: '7d07f6fa-af52-43af-aa7b-8d3885740249', url: 'https://github.com/ZilanBshaShaik/maven-web-application.git'
+            }
+        }
+        
+        stage('do the build') {
+            steps{
+                sh "mvn clean package"
+            }
+        }
+        
+        stage('sonar validation'){
+            steps{
+                sh "mvn clean sonar:sonar"
+            }
+        }
+        
+        stage('deploy the artifact into nexus repository') {
+            steps{
+                sh "mvn clean deploy"
+            }
+        }
+        
+        stage('push war into tomcat server'){
+            steps{
+                sshagent(['5ec75854-4110-4663-a05b-f3dbae321120']){
+                    sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ubuntu@13.233.207.239:/opt/tomcat/webapps/"
+                }
+            }
+        }
+        
+    }
+}

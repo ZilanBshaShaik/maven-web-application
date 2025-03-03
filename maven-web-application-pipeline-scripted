@@ -1,0 +1,27 @@
+node ('jenkins-slave1') {
+    
+    def mavenHome = tool name: "maven-3.9.9"
+    stage('Checkout Code') {
+        git branch: 'development', credentialsId: '7d07f6fa-af52-43af-aa7b-8d3885740249', url: 'https://github.com/ZilanBshaShaik/maven-web-application.git'
+    }
+    
+    stage('Do The Build') {
+        sh "${mavenHome}/bin/mvn --version"
+        sh "${mavenHome}/bin/mvn clean package"
+    }
+    
+    stage('Execute Sonar Check') {
+        sh "${mavenHome}/bin/mvn clean  sonar:sonar"
+    }
+    
+    stage('Push The Build Artifact Into Nexus Repository') {
+        sh "${mavenHome}/bin/mvn clean deploy"
+    }
+    
+    stage('Deploy The WAR File Into The Tomcat Server') {
+        sshagent(['5ec75854-4110-4663-a05b-f3dbae321120']) {
+            sh "scp -o StrictHostKeyChecking=no target/maven-web-application.war ubuntu@13.233.207.239:/opt/tomcat/webapps/" 
+}
+        
+    }
+}
