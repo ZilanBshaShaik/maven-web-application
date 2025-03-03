@@ -1,4 +1,4 @@
-# # build script for maven build using pipeline script way
+##  build script for maven build using pipeline script way
 node ('jenkins-slave1') {
     
     def mavenHome = tool name: "maven-3.9.9"
