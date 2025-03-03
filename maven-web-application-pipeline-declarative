@@ -1,3 +1,4 @@
+# build script for maven build using pipeline declarative way
 pipeline {
     agent {label 'jenkins-slave1'}
     
